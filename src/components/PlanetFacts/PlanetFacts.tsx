@@ -3,6 +3,7 @@ import { PlantFactProps } from "../../interface";
 
 export const PlanetFacts = ({
   name,
+  images,
   overview,
   structure,
   geology,
@@ -15,21 +16,28 @@ export const PlanetFacts = ({
 }: PlantFactProps) => {
   let content = "";
   let source = "";
+  let image = "";
 
   if (selectedCategory === "overview") {
     content = overview.content;
     source = overview.source;
+    image = images.planet;
   } else if (selectedCategory === "structure") {
     content = structure.content;
     source = structure.source;
+    image = images.internal;
   } else if (selectedCategory === "geology") {
     content = geology.content;
     source = geology.source;
+    image = images.geology;
   }
 
   return (
     <C.PlanetCard>
-      <div className="planet-image">PlanetFacts</div>
+      <div className="planet-image">
+        <img src={image} alt="" />
+        Plant image
+      </div>
       <div className="planet-info">
         <h2>{name}</h2>
         <p>{content}</p>
