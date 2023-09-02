@@ -1,5 +1,7 @@
 import * as C from "./styles";
 import { PlantFactProps } from "../../interface";
+import { planetColors } from "../../colors";
+import Svg from "/assets/icon-source.svg";
 
 export const PlanetFacts = ({
   name,
@@ -18,6 +20,8 @@ export const PlanetFacts = ({
   let source = "";
   let image = "";
 
+  const backgroundColor = planetColors[name];
+
   if (selectedCategory === "overview") {
     content = overview.content;
     source = overview.source;
@@ -34,56 +38,82 @@ export const PlanetFacts = ({
 
   return (
     <C.PlanetCard>
+      <div className="category">
+        <div
+          className="overview"
+          onClick={() => handleSelectedCategory("overview")}
+          style={{
+            backgroundColor:
+              selectedCategory === "overview" ? backgroundColor : "",
+          }}
+        >
+          <p>
+            <span>01</span>
+            OVERVIEW
+          </p>
+        </div>
+        <div
+          className="structure"
+          onClick={() => handleSelectedCategory("structure")}
+          style={{
+            backgroundColor:
+              selectedCategory === "structure" ? backgroundColor : "",
+          }}
+        >
+          <p>
+            <span>02</span>
+            INTERNAL STRUCTURE
+          </p>
+        </div>
+        <div
+          className="geology"
+          onClick={() => handleSelectedCategory("geology")}
+          style={{
+            backgroundColor:
+              selectedCategory === "geology" ? backgroundColor : "",
+          }}
+        >
+          <p>
+            <span>03</span>
+            GEOLOGY
+          </p>
+        </div>
+      </div>
       <div className="planet-image">
         <img src={image} alt="" />
-        Plant image
       </div>
       <div className="planet-info">
         <h2>{name}</h2>
         <p>{content}</p>
-        <p>{source}</p>
-        <div className="catergory">
-          <div
-            className="overview"
-            onClick={() => handleSelectedCategory("overview")}
-          >
-            <p>
-              <span>01</span>
-              OVERVIEW
-            </p>
-          </div>
-          <div
-            className="structure"
-            onClick={() => handleSelectedCategory("structure")}
-          >
-            <p>
-              <span>02</span>
-              INTERNAL STRUCTURE
-            </p>
-          </div>
-          <div
-            className="geology"
-            onClick={() => handleSelectedCategory("geology")}
-          >
-            <p>
-              <span>03</span>
-              GEOLOGY
-            </p>
-          </div>
-        </div>
+        <p className="source">
+          Source: <a href={source}>Wikipedia</a>
+          <img src={Svg} alt="" width="8px" />
+        </p>
       </div>
       <div className="planet-stat">
         <div>
-          <p>{rotation}</p>
+          <p>
+            <span>ROTATION TIME</span>
+            {rotation}
+          </p>
         </div>
         <div>
-          <p>{revolution}</p>
+          <p>
+            <span>REVOLUTION TIME</span>
+            {revolution}
+          </p>
         </div>
         <div>
-          <p>{radius}</p>
+          <p>
+            <span>RADIUS</span>
+            {radius}
+          </p>
         </div>
         <div>
-          <p>{temperature}</p>
+          <p>
+            <span>AVERAGE TEMP</span>
+            {temperature}
+          </p>
         </div>
       </div>
     </C.PlanetCard>
